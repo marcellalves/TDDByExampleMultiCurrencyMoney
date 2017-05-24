@@ -1,15 +1,15 @@
 ﻿namespace TDDByExample.MultiCurrencyMoney.App
 {
-    public class Dollar : Money
+    public class Franc : Money
     {
-        public Dollar(int amount)
+        public Franc(int amount)
         {
-            _amount= amount;
+            _amount = amount;
         }
 
         public override Money Times(int multiplier)
         {
-            return new Dollar(_amount * multiplier);
+            return new Franc(_amount * multiplier);
         }
     }
 }
