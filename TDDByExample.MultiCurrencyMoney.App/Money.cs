@@ -1,6 +1,6 @@
 ﻿namespace TDDByExample.MultiCurrencyMoney.App
 {
-    public class Money
+    public class Money : Expression
     {
         protected internal int _amount;
         protected string currency;
@@ -14,6 +14,11 @@
         public Money Times(int multiplier)
         {
             return new Money(_amount * multiplier, currency);
+        }
+
+        public Expression Plus(Money addend)
+        {
+            return new Sum(this, addend);
         }
 
         public static Money Dollar(int amount)

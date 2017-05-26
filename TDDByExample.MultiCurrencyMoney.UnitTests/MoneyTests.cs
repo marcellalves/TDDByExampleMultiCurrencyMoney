@@ -1,5 +1,6 @@
 using TDDByExample.MultiCurrencyMoney.App;
 using Xunit;
+using Expression = TDDByExample.MultiCurrencyMoney.App.Expression;
 
 namespace TDDByExample.MultiCurrencyMoney.UnitTests
 {
@@ -26,6 +27,39 @@ namespace TDDByExample.MultiCurrencyMoney.UnitTests
         {
             Assert.Equal("USD", Money.Dollar(1).Currency());
             Assert.Equal("CHF", Money.Franc(1).Currency());
+        }
+
+        [Fact]
+        public void testSimpleAddition()
+        {
+            var five = Money.Dollar(5);
+            Expression sum = five.Plus(five);
+            var bank = new Bank();
+            Money reduced = bank.Reduce(sum, "USD");
+
+            Assert.Equal(Money.Dollar(10), reduced);
+        }
+
+        [Fact]
+        public void testPlusReturnsSum()
+        {
+            var five = Money.Dollar(5);
+            Expression result = five.Plus(five);
+            Sum sum = (Sum) result;
+
+            Assert.Equal(five, sum.Augend);
+            Assert.Equal(five, sum.Addend);
+        }
+
+        [Fact]
+        public void testReduceSum()
+        {
+            
+            Expression sum = new Sum(Money.Dollar(3), Money.Dollar(4));
+            var bank = new Bank();
+            var result = bank.Reduce(sum, "USD");
+            
+            Assert.Equal(Money.Dollar(7), result);
         }
     }
 }
