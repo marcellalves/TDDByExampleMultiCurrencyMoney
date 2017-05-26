@@ -33,9 +33,9 @@ namespace TDDByExample.MultiCurrencyMoney.UnitTests
         public void testSimpleAddition()
         {
             var five = Money.Dollar(5);
-            Expression sum = five.Plus(five);
+            var sum = five.Plus(five);
             var bank = new Bank();
-            Money reduced = bank.Reduce(sum, "USD");
+            var reduced = bank.Reduce(sum, "USD");
 
             Assert.Equal(Money.Dollar(10), reduced);
         }
@@ -44,8 +44,8 @@ namespace TDDByExample.MultiCurrencyMoney.UnitTests
         public void testPlusReturnsSum()
         {
             var five = Money.Dollar(5);
-            Expression result = five.Plus(five);
-            Sum sum = (Sum) result;
+            var result = five.Plus(five);
+            var sum = (Sum) result;
 
             Assert.Equal(five, sum.Augend);
             Assert.Equal(five, sum.Addend);
@@ -55,7 +55,7 @@ namespace TDDByExample.MultiCurrencyMoney.UnitTests
         public void testReduceSum()
         {
             
-            Expression sum = new Sum(Money.Dollar(3), Money.Dollar(4));
+            var sum = new Sum(Money.Dollar(3), Money.Dollar(4));
             var bank = new Bank();
             var result = bank.Reduce(sum, "USD");
             
