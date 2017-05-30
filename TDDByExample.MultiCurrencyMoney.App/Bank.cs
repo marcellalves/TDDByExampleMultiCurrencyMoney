@@ -4,9 +4,12 @@
     {
         public Money Reduce(Expression source, string to)
         {
-            var sum = (Sum) source;
-            var amount = sum.Augend._amount + sum.Addend._amount;
-            return new Money(amount, to);
+            return source.Reduce(to);
+        }
+
+        public void AddRate(string chf, string usd, int i)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

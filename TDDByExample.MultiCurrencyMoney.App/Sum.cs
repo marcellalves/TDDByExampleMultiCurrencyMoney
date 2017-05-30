@@ -10,5 +10,11 @@
             Augend = augend;
             Addend = addend;
         }
+
+        public Money Reduce(string to)
+        {
+            var amount = Augend._amount + Addend._amount;
+            return new Money(amount, to);
+        }
     }
 }

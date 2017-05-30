@@ -47,5 +47,14 @@
         {
             return currency;
         }
+
+        public Money Reduce(string to)
+        {
+            var rate = (currency.Equals("CHF") && to.Equals("USD"))
+                ? 2
+                : 1;
+
+            return new Money(_amount / rate, to);
+        }
     }
 }
