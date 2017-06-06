@@ -50,7 +50,7 @@
 
         public Money Reduce(Bank bank, string to)
         {
-            int rate = bank.Rate(currency, to);
+            var rate = bank.Rate(currency, to);
 
             return new Money(_amount / rate, to);
         }

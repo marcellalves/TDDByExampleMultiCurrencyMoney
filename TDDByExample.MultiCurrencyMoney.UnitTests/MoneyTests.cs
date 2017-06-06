@@ -54,11 +54,11 @@ namespace TDDByExample.MultiCurrencyMoney.UnitTests
         [Fact]
         public void testReduceSum()
         {
-            
+
             var sum = new Sum(Money.Dollar(3), Money.Dollar(4));
             var bank = new Bank();
             var result = bank.Reduce(sum, "USD");
-            
+
             Assert.Equal(Money.Dollar(7), result);
         }
 
@@ -97,6 +97,32 @@ namespace TDDByExample.MultiCurrencyMoney.UnitTests
             var result = bank.Reduce(fiveBucks.Plus(tenFrancs), "USD");
 
             Assert.Equal(Money.Dollar(10), result);
+        }
+
+        [Fact]
+        public void testSumPlusMoney()
+        {
+            var fiveBucks = Money.Dollar(5);
+            var tenFrancs = Money.Franc(10);
+            var bank = new Bank();
+            bank.AddRate("CHF", "USD", 2);
+            var sum = new Sum(fiveBucks, tenFrancs).Plus(fiveBucks);
+            var result = bank.Reduce(sum, "USD");
+
+            Assert.Equal(Money.Dollar(15), result);
+        }
+
+        [Fact]
+        public void testSumTimes()
+        {
+            var fiveBucks = Money.Dollar(5);
+            var tenFrancs = Money.Franc(10);
+            var bank = new Bank();
+            bank.AddRate("CHF", "USD", 2);
+            var sum = new Sum(fiveBucks, tenFrancs).Times(2);
+            var result = bank.Reduce(sum, "USD");
+
+            Assert.Equal(Money.Dollar(20), result);
         }
     }
 }
