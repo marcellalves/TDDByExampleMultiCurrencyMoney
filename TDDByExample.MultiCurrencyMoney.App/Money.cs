@@ -11,12 +11,12 @@
             this.currency = currency;
         }
 
-        public Money Times(int multiplier)
+        public Expression Times(int multiplier)
         {
             return new Money(_amount * multiplier, currency);
         }
 
-        public Expression Plus(Money addend)
+        public Expression Plus(Expression addend)
         {
             return new Sum(this, addend);
         }
@@ -48,11 +48,9 @@
             return currency;
         }
 
-        public Money Reduce(string to)
+        public Money Reduce(Bank bank, string to)
         {
-            var rate = (currency.Equals("CHF") && to.Equals("USD"))
-                ? 2
-                : 1;
+            int rate = bank.Rate(currency, to);
 
             return new Money(_amount / rate, to);
         }

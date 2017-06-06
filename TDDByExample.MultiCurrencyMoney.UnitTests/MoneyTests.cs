@@ -80,5 +80,23 @@ namespace TDDByExample.MultiCurrencyMoney.UnitTests
 
             Assert.Equal(Money.Dollar(1), result);
         }
+
+        [Fact]
+        public void testIdentityRate()
+        {
+            Assert.Equal(1, new Bank().Rate("USD", "USD"));
+        }
+
+        [Fact]
+        public void testMixedAddition()
+        {
+            var fiveBucks = Money.Dollar(5);
+            var tenFrancs = Money.Franc(10);
+            var bank = new Bank();
+            bank.AddRate("CHF", "USD", 2);
+            var result = bank.Reduce(fiveBucks.Plus(tenFrancs), "USD");
+
+            Assert.Equal(Money.Dollar(10), result);
+        }
     }
 }
